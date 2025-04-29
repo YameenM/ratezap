@@ -1,7 +1,4 @@
 streamlit
 pandas
-numpy
 reportlab
-matplotlib
 altair
-python-dotenv
