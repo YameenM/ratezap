@@ -5,7 +5,7 @@ from reportlab.lib import colors
 from io import BytesIO
 import pandas as pd
 from datetime import datetime
-from utils import hide_streamlit_ui
+from helpers.utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 def generate_pdf(company_name, timestamp, occupancy, adr, summary_data, room_df=None, extra_df=None):

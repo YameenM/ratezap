@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 from utils import hide_streamlit_ui
 hide_streamlit_ui()
 # Database path
@@ -104,7 +105,7 @@ CREATE TABLE IF NOT EXISTS companies (
 
 
 # Ensure admin user exists
-import hashlib
+
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 

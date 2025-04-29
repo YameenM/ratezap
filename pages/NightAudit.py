@@ -150,11 +150,6 @@ summary_data = {}
 room_summary_df = pd.DataFrame()
 extra_fields_df = pd.DataFrame()
 
-# 🔒 Require login
-if "user" not in st.session_state:
-    st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
-    st.stop()
 
 # Setup DB
 db_path = "/mnt/data/ratezap.db" if os.path.exists("/mnt/data") else "ratezap.db"

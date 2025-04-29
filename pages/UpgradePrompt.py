@@ -2,13 +2,13 @@ import streamlit as st
 from datetime import datetime, timedelta
 from utils import hide_streamlit_ui
 
-
 st.set_page_config(page_title="Upgrade | RateZap", layout="centered", initial_sidebar_state="collapsed")
 hide_streamlit_ui()
 
 user = st.session_state.get("user", {})
 if not user:
     st.warning("⚠️ Please log in.")
+    st.switch_page("pages/Home.py")
     st.stop()
     
     

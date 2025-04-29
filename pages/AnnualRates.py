@@ -86,7 +86,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
+    st.switch_page("pages/Home.py")
     st.stop()
 
 # Hide Sidebar

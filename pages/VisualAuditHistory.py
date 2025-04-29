@@ -87,7 +87,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
+    st.switch_page("pages/Home.py")
     st.stop()
 
 # ➡️ Custom Top Navigation Bar
@@ -137,12 +137,6 @@ with st.container():
             st.switch_page("pages/Profile.py")
 
 st.markdown("---")  # Nice separator line
-
-
-# 🔒 Require login
-if "user" not in st.session_state:
-    st.warning("⚠️ Please log in first.")
-    st.stop()
 
 st.title("📋 Night Audit History")
 

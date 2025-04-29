@@ -5,12 +5,9 @@ import pandas as pd
 import sqlite3
 from datetime import datetime, timedelta
 import altair as alt
-
 st.set_page_config(page_title="Rate Optimizer & Projections", layout="wide")
-
 import streamlit as st
 from utils import hide_streamlit_ui
-
 
 # Hide Streamlit sidebar completely
 hide_streamlit_ui()
@@ -86,17 +83,6 @@ if "user" not in st.session_state:
     st.switch_page("Home.py")
     st.stop()
 
-import streamlit as st
-from utils import hide_streamlit_ui
-
-# Hide Sidebar
-hide_streamlit_ui()
-
-# 🔒 Require Login
-if "user" not in st.session_state:
-    st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
-    st.stop()
 
 # ➡️ Custom Top Navigation Bar
 # Split layout into 7 equal columns
@@ -145,14 +131,6 @@ with st.container():
             st.switch_page("pages/Profile.py")
 
 st.markdown("---")  # Nice separator line
-
-
-# 🔐 Require Login
-if "user" not in st.session_state:
-    st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
-    st.stop()
-    
 
 # DB
 conn = sqlite3.connect("ratezap.db", check_same_thread=False)
