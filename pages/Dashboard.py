@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "app")))
 import sqlite3
 import os
 from datetime import datetime
-from  app.helpers.ota_links import display_ota_links_inline
+from  helpers.ota_links import display_ota_links_inline
 import pandas as pd
 from helpers.weather import get_user_city, get_weather_for_city
 from utils import hide_streamlit_ui
