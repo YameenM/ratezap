@@ -1,19 +1,14 @@
-from utils import hide_streamlit_ui
 
-hide_streamlit_ui()
 import streamlit as st
-import os
-
-# ⬛ Page config
 st.set_page_config(page_title="📂 Sample Import Templates", layout="wide")
-
-# Hide sidebar if needed (optional)
+import os
 from utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 # 🔒 Require login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
+    st.switch_page("pages/Home.py")
     st.stop()
 
 # 📦 Download location
