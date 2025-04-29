@@ -1,0 +1,10 @@
+
+__pycache__/
+venv/
+*.pyc
+.env
+ratezap.db
+ratezao.db
+email_log.txt
+*.zip
+.streamlit/secrets.toml
