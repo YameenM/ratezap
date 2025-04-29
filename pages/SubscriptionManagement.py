@@ -1,8 +1,8 @@
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 hide_streamlit_ui()
 import streamlit as st
 import sqlite3
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 if "user" not in st.session_state or st.session_state["user"].get("email") != "admin@ratezap.com":

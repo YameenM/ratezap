@@ -5,13 +5,13 @@ import sqlite3
 import os
 from datetime import datetime
 import json
-from app.helpers.NightAuditParser import (
+from helpers.NightAuditParser import (
     parse_standard_audit,
     parse_custom_audit,
     parse_hilton_audit,
     parse_marriott_audit
 )
-from app.helpers.night_audit_utils import save_audit_summary, convert_to_serializable, send_night_audit_email
+from helpers.night_audit_utils import save_audit_summary, convert_to_serializable, send_night_audit_email
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
@@ -89,7 +89,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home")
+    st.switch_page("Home.py")
     st.stop()
 
 # Hide Sidebar
@@ -115,31 +115,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard")
+            st.switch_page("pages/Dashboard.py")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates")
+            st.switch_page("pages/AnnualRates.py")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit")
+            st.switch_page("pages/NightAudit.py")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory")
+            st.switch_page("pages/VisualAuditHistory.py")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer")
+            st.switch_page("pages/RateOptimizer.py")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies")
+            st.switch_page("pages/Companies.py")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile")
+            st.switch_page("pages/Profile.py")
 
 st.markdown("---")  # Nice separator line
 
@@ -153,7 +153,7 @@ extra_fields_df = pd.DataFrame()
 # 🔒 Require login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home")
+    st.switch_page("Home.py")
     st.stop()
 
 # Setup DB

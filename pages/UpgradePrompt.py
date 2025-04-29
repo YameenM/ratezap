@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 
 
 st.set_page_config(page_title="Upgrade | RateZap", layout="centered", initial_sidebar_state="collapsed")
@@ -56,7 +56,7 @@ if st.button("🎫 Request Manual Upgrade"):
 
 # Back to login
 if st.button("🔙 Back to Login"):
-    st.switch_page("Home")
+    st.switch_page("Home.py")
 
 st.markdown("---")
 st.markdown("Need help? Email us at [support@ratezap.com](mailto:support@ratezap.com)")

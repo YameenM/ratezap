@@ -1,4 +1,4 @@
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 hide_streamlit_ui()
 import smtplib
 from email.mime.text import MIMEText

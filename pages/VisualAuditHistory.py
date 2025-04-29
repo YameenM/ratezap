@@ -3,7 +3,7 @@ import streamlit as st
 import sqlite3
 import json
 import pandas as pd
-from app.helpers.night_audit_pdf import generate_audit_pdf
+from helpers.night_audit_pdf import generate_audit_pdf
 from datetime import datetime
 import streamlit as st
 st.set_page_config(page_title="Visual Audit History", layout="wide")
@@ -17,7 +17,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from config import EMAIL_ADDRESS, EMAIL_PASSWORD, SMTP_SERVER, SMTP_PORT
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 hide_streamlit_ui()
 #=======================================✨RateZap=============================================
 st.markdown("""
@@ -87,7 +87,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home")
+    st.switch_page("Home.py")
     st.stop()
 
 # ➡️ Custom Top Navigation Bar
@@ -110,31 +110,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard")
+            st.switch_page("pages/Dashboard.py")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates")
+            st.switch_page("pages/AnnualRates.py")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit")
+            st.switch_page("pages/NightAudit.py")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory")
+            st.switch_page("pages/VisualAuditHistory.py")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer")
+            st.switch_page("pages/RateOptimizer.py")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies")
+            st.switch_page("pages/Companies.py")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile")
+            st.switch_page("pages/Profile.py")
 
 st.markdown("---")  # Nice separator line
 

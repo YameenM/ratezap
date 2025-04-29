@@ -8,8 +8,8 @@ import os
 from datetime import datetime
 from  app.helpers.ota_links import display_ota_links_inline
 import pandas as pd
-from app.helpers.weather import get_user_city, get_weather_for_city
-from app.utils import hide_streamlit_ui
+from helpers.weather import get_user_city, get_weather_for_city
+from utils import hide_streamlit_ui
 
 
 # Hide Streamlit sidebar completely
@@ -118,31 +118,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard")
+            st.switch_page("pages/Dashboard.py")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates")
+            st.switch_page("pages/AnnualRates.py")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit")
+            st.switch_page("pages/NightAudit.py")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory")
+            st.switch_page("pages/VisualAuditHistory.py")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer")
+            st.switch_page("pages/RateOptimizer.py")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies")
+            st.switch_page("pages/Companies.py")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile")
+            st.switch_page("pages/Profile.py")
             
             
 WEATHER_API_KEY = "76d5172810d44c39bf140434252504"
@@ -378,7 +378,7 @@ with st.expander("🧠 Smart Rate Optimizer (Insights)", expanded=False):
         col1, col2 = st.columns([8, 2])
         with col2:
             if st.button("➡️ Full Optimizer", key="open_optimizer_btn"):
-                st.switch_page("RateOptimizer")
+                st.switch_page("pages/RateOptimizer.py")
     else:
         st.info("No recent rate data available. Save some rate suggestions first.")
 

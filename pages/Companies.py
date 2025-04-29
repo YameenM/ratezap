@@ -5,9 +5,9 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 from datetime import datetime
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 
-from app.helpers.companies import delete_company
+from helpers.companies import delete_company
 
 # 🔧 Page Setup
 st.set_page_config(page_title="Companies | RateZap", layout="wide")
@@ -73,7 +73,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home")
+    st.switch_page("Home.py")
     st.stop()
 
 # 🎯 User Info
@@ -109,31 +109,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard")
+            st.switch_page("pages/Dashboard.py")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates")
+            st.switch_page("pages/AnnualRates.py")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit")
+            st.switch_page("pages/NightAudit.py")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory")
+            st.switch_page("pages/VisualAuditHistory.py")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer")
+            st.switch_page("pages/RateOptimizer.py")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies")
+            st.switch_page("pages/Companies.py")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile")
+            st.switch_page("pages/Profile.py")
 st.markdown("---")  # Nice separator line
 
 
@@ -172,4 +172,4 @@ else:
 
 # 🔙 Back Button
 if st.button("⬅️ Back to Dashboard"):
-    st.switch_page("Dashboard")
+    st.switch_page("pages/Dashboard.py")

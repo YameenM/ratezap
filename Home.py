@@ -3,7 +3,7 @@ import streamlit as st
 import sqlite3
 import hashlib
 from datetime import datetime, timedelta
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 
 st.set_page_config(page_title="Home | RateZap", layout="wide", initial_sidebar_state="collapsed")
 hide_streamlit_ui()
@@ -116,7 +116,7 @@ with right:
                     }
 
                     st.toast("✅ Registered! Redirecting...")
-                    st.switch_page("Dashboard")
+                    st.switch_page("pages/Dashboard.py")
 
                 except sqlite3.IntegrityError:
                     st.error("❌ This email is already registered.")
@@ -141,7 +141,7 @@ with right:
 
                 if status == "expired":
                     st.warning("🚫 Your free trial has expired. Please Upfrade to Continue...")
-                    st.switch_page("UpgradePrompt")
+                    st.switch_page("pages/UpgradePrompt.py")
                     st.stop()
 
 
@@ -167,9 +167,9 @@ with right:
                 st.toast(f"✅ Welcome, {full_name}!")
                 
                 if status == "admin":
-                    st.switch_page("Admin")
+                    st.switch_page("pages/Admin.py")
                 else:
-                    st.switch_page("Dashboard")
+                    st.switch_page("pages/Dashboard.py")
 
             else:
                 st.error("❌ Invalid email or password.")
