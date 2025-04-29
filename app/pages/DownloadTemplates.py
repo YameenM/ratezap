@@ -1,4 +1,4 @@
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 hide_streamlit_ui()
 import streamlit as st
@@ -20,7 +20,7 @@ if "user" not in st.session_state:
 TEMPLATE_ZIP_PATH = "RateZap_Sample_Import_Templates.zip"
 
 if st.button("⬅️ Back to Night Audit"):
-    st.switch_page("pages/NightAudit.py")
+    st.switch_page("NightAudit.py")
 
 st.title("📂 Sample Import Templates")
 st.markdown("""

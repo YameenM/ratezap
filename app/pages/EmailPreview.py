@@ -1,7 +1,7 @@
 import streamlit as st
 # Page config
 st.set_page_config(page_title="Daily Email Preview | RateZap", layout="centered")
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 hide_streamlit_ui()
 import smtplib
