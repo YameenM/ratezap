@@ -1,12 +1,14 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# 🔥 Forcefully add root directory to sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from helpers.night_audit_pdf import generate_audit_pdf
 import streamlit as st
 st.set_page_config(page_title="Visual Audit History", layout="wide")
 import sqlite3
 import json
 import pandas as pd
-from helpers.night_audit_pdf import generate_audit_pdf
 from datetime import datetime
 import os
 import smtplib
