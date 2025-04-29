@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 def display_ota_links_inline(hotel_name, city):

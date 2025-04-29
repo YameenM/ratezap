@@ -9,7 +9,7 @@ import altair as alt
 st.set_page_config(page_title="Rate Optimizer & Projections", layout="wide")
 
 import streamlit as st
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 
 # Hide Streamlit sidebar completely

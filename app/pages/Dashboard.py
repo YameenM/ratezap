@@ -1,12 +1,15 @@
 import streamlit as st
+import sys
+import os
 st.set_page_config(page_title="Dashboard | RateZap", layout="wide", initial_sidebar_state="collapsed")
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "app")))
 import sqlite3
 import os
 from datetime import datetime
 from app.helpers.ota_links import display_ota_links_inline
 import pandas as pd
 from app.helpers.weather import get_user_city, get_weather_for_city
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 
 # Hide Streamlit sidebar completely

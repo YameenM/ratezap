@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 
 st.set_page_config(page_title="Upgrade | RateZap", layout="centered", initial_sidebar_state="collapsed")

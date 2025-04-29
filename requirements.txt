@@ -1,4 +1,7 @@
-streamlit
-pandas
-reportlab
-altair
+streamlit>=1.24
+pandas>=1.5
+altair>=4.2
+reportlab>=3.6
+openpyxl>=3.1
+xlsxwriter>=3.1
+python-dotenv>=1.0
