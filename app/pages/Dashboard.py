@@ -231,15 +231,6 @@ custom_city = custom_data.get("city", "")
 custom_country = custom_data.get("country", "")
 currency = custom_data.get("currency", "$")
 
-# 🔗 Action Buttons (top right)
-#col_top_spacer, col_button1, col_button2 = st.columns([9, 1.5, 1.5])
-#with col_button1:
-    #if st.button("🅰️ Night Audit"):
-        #st.switch_page("pages/NightAudit.py")
-#with col_button2:
-    #if st.button("📄 Annual Rates"):
-        #st.switch_page("pages/AnnualRates.py")
-
 
 # --- ⚙️ Customize Dashboard ---
 with st.expander("⚙️ Customize Dashboard", expanded=False):
@@ -387,7 +378,7 @@ with st.expander("🧠 Smart Rate Optimizer (Insights)", expanded=False):
         col1, col2 = st.columns([8, 2])
         with col2:
             if st.button("➡️ Full Optimizer", key="open_optimizer_btn"):
-                st.switch_page("pages/RateOptimizer.py")
+                st.switch_page("RateOptimizer.py")
     else:
         st.info("No recent rate data available. Save some rate suggestions first.")
 
