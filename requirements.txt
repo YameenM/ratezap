@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+reportlab
+matplotlib
+altair
+sqlite3-binary
+python-dotenv
