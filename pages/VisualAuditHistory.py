@@ -1,7 +1,7 @@
 
 import streamlit as st
-from helpers.night_audit_pdf import generate_pdf
 st.set_page_config(page_title="Visual Audit History", layout="wide")
+from helpers.night_audit_pdf import generate_pdf
 import sqlite3
 import json
 import pandas as pd
