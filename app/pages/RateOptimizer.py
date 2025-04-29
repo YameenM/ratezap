@@ -83,7 +83,7 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
+    st.switch_page("Home")
     st.stop()
 
 import streamlit as st
@@ -95,6 +95,7 @@ hide_streamlit_ui()
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
+    st.switch_page("Home")
     st.stop()
 
 # ➡️ Custom Top Navigation Bar
@@ -117,31 +118,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard.py")
+            st.switch_page("Dashboard")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates.py")
+            st.switch_page("AnnualRates")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit.py")
+            st.switch_page("NightAudit")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory.py")
+            st.switch_page("VisualAuditHistory")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer.py")
+            st.switch_page("RateOptimizer")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies.py")
+            st.switch_page("Companies")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile.py")
+            st.switch_page("Profile")
 
 st.markdown("---")  # Nice separator line
 
@@ -149,7 +150,7 @@ st.markdown("---")  # Nice separator line
 # 🔐 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("Home.py")
+    st.switch_page("Home")
     st.stop()
     
 

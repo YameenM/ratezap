@@ -20,7 +20,7 @@ if "user" not in st.session_state:
 TEMPLATE_ZIP_PATH = "RateZap_Sample_Import_Templates.zip"
 
 if st.button("⬅️ Back to Night Audit"):
-    st.switch_page("NightAudit.py")
+    st.switch_page("NightAudit")
 
 st.title("📂 Sample Import Templates")
 st.markdown("""

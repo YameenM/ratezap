@@ -56,7 +56,7 @@ if st.button("🎫 Request Manual Upgrade"):
 
 # Back to login
 if st.button("🔙 Back to Login"):
-    st.switch_page("Home.py")
+    st.switch_page("Home")
 
 st.markdown("---")
 st.markdown("Need help? Email us at [support@ratezap.com](mailto:support@ratezap.com)")

@@ -118,31 +118,31 @@ with st.container():
 
     with nav_col1:
         if st.button("🏠 Dashboard"):
-            st.switch_page("Dashboard.py")
+            st.switch_page("Dashboard")
 
     with nav_col2:
         if st.button("📄 Annual Rates"):
-            st.switch_page("AnnualRates.py")
+            st.switch_page("AnnualRates")
 
     with nav_col3:
         if st.button("🛏️ Night Audit"):
-            st.switch_page("NightAudit.py")
+            st.switch_page("NightAudit")
 
     with nav_col4:
         if st.button("🕓 Audit History"):
-            st.switch_page("VisualAuditHistory.py")
+            st.switch_page("VisualAuditHistory")
 
     with nav_col5:
         if st.button("📈 Rate Optimizer"):
-            st.switch_page("RateOptimizer.py")
+            st.switch_page("RateOptimizer")
 
     with nav_col6:
         if st.button("🏢 Companies List"):
-            st.switch_page("Companies.py")
+            st.switch_page("Companies")
 
     with nav_col7:
         if st.button("👤 My Profile"):
-            st.switch_page("Profile.py")
+            st.switch_page("Profile")
             
             
 WEATHER_API_KEY = "76d5172810d44c39bf140434252504"
@@ -378,7 +378,7 @@ with st.expander("🧠 Smart Rate Optimizer (Insights)", expanded=False):
         col1, col2 = st.columns([8, 2])
         with col2:
             if st.button("➡️ Full Optimizer", key="open_optimizer_btn"):
-                st.switch_page("RateOptimizer.py")
+                st.switch_page("RateOptimizer")
     else:
         st.info("No recent rate data available. Save some rate suggestions first.")
 

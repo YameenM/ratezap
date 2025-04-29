@@ -6,7 +6,7 @@ hide_streamlit_ui()
 
 
 if st.button("✍️ Register/Login"):
-        st.switch_page("Home.py")
+        st.switch_page("Home")
         
 # 💼 Title Section
 st.markdown("""
