@@ -1,8 +1,8 @@
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 import streamlit as st
 import sqlite3
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 hide_streamlit_ui()
 

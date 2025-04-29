@@ -1,4 +1,4 @@
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 import streamlit as st
 import os
@@ -7,7 +7,7 @@ import os
 st.set_page_config(page_title="📂 Sample Import Templates", layout="wide")
 
 # Hide sidebar if needed (optional)
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 # 🔒 Require login

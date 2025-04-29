@@ -1,5 +1,5 @@
 import requests
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 

@@ -15,7 +15,7 @@ from app.helpers.companies import generate_company_code
 # ========== Setup ==========
 st.set_page_config(page_title="Annual Rates | RateZap", layout="wide")
 # Hide Streamlit sidebar completely
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 
 st.markdown("""

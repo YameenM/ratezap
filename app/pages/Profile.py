@@ -3,7 +3,7 @@ import streamlit as st
 import sqlite3
 
 import streamlit as st
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 # Hide Streamlit sidebar completely
 hide_streamlit_ui()
@@ -78,7 +78,7 @@ if "user" not in st.session_state:
     st.stop()
 
 import streamlit as st
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 # Hide Sidebar
 hide_streamlit_ui()

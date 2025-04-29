@@ -3,7 +3,7 @@ import streamlit as st
 import sqlite3
 import hashlib
 from datetime import datetime, timedelta
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 st.set_page_config(page_title="Home | RateZap", layout="wide", initial_sidebar_state="collapsed")
 hide_streamlit_ui()

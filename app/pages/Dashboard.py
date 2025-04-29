@@ -6,7 +6,7 @@ from datetime import datetime
 from app.helpers.ota_links import display_ota_links_inline
 import pandas as pd
 from app.helpers.weather import get_user_city, get_weather_for_city
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 
 # Hide Streamlit sidebar completely
 hide_streamlit_ui()

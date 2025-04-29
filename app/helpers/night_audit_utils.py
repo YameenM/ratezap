@@ -11,7 +11,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 import altair as alt
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart

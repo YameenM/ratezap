@@ -1,7 +1,7 @@
 # Reset Password
 import streamlit as st
 st.set_page_config(page_title="Reset Password | RateZap", layout="centered")
-from utils import hide_streamlit_ui
+from app.utils import hide_streamlit_ui
 hide_streamlit_ui()
 import sqlite3
 import hashlib
