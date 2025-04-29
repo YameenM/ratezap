@@ -3,9 +3,9 @@ st.set_page_config(page_title="Dashboard | RateZap", layout="wide", initial_side
 import sqlite3
 import os
 from datetime import datetime
-from helpers.ota_links import display_ota_links_inline
+from app.helpers.ota_links import display_ota_links_inline
 import pandas as pd
-from helpers.weather import get_user_city, get_weather_for_city
+from app.helpers.weather import get_user_city, get_weather_for_city
 from utils import hide_streamlit_ui
 
 # Hide Streamlit sidebar completely

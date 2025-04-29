@@ -10,7 +10,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, 
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import cm
-from helpers.companies import generate_company_code
+from app.helpers.companies import generate_company_code
 
 # ========== Setup ==========
 st.set_page_config(page_title="Annual Rates | RateZap", layout="wide")

@@ -6,7 +6,7 @@ import sqlite3
 import pandas as pd
 from datetime import datetime
 from utils import hide_streamlit_ui
-from helpers.companies import delete_company
+from app.helpers.companies import delete_company
 
 # 🔧 Page Setup
 st.set_page_config(page_title="Companies | RateZap", layout="wide")
