@@ -5,7 +5,8 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 from datetime import datetime
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
+
 from app.helpers.companies import delete_company
 
 # 🔧 Page Setup

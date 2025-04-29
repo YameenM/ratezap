@@ -1,6 +1,7 @@
 import streamlit as st
 st.set_page_config(page_title="Pricing | RateZap", layout="wide", initial_sidebar_state="collapsed")
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
+
 hide_streamlit_ui()
 
 

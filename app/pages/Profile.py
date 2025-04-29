@@ -3,7 +3,8 @@ import streamlit as st
 import sqlite3
 
 import streamlit as st
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
+
 
 # Hide Streamlit sidebar completely
 hide_streamlit_ui()

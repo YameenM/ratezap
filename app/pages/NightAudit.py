@@ -18,7 +18,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 from io import BytesIO
 import altair as alt
 # Hide Streamlit sidebar completely
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
+
 hide_streamlit_ui()
 
 st.markdown("""

@@ -17,7 +17,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from config import EMAIL_ADDRESS, EMAIL_PASSWORD, SMTP_SERVER, SMTP_PORT
-from app.utils import hide_streamlit_ui
+from utils import hide_streamlit_ui
 hide_streamlit_ui()
 #=======================================✨RateZap=============================================
 st.markdown("""
