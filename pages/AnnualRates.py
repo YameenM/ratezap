@@ -16,7 +16,6 @@ from helpers.companies import generate_company_code
 st.set_page_config(page_title="Annual Rates | RateZap", layout="wide")
 # Hide Streamlit sidebar completely
 from utils import hide_streamlit_ui
-
 hide_streamlit_ui()
 
 st.markdown("""
@@ -86,11 +85,8 @@ st.markdown("""
 # 🔒 Require Login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("pages/Home.py")
+    st.switch_page("Home.py")
     st.stop()
-
-# Hide Sidebar
-hide_streamlit_ui()
 
 # ➡️ Custom Top Navigation Bar
 # Split layout into 7 equal columns

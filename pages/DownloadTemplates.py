@@ -8,7 +8,7 @@ hide_streamlit_ui()
 # 🔒 Require login
 if "user" not in st.session_state:
     st.warning("⚠️ Please log in first.")
-    st.switch_page("pages/Home.py")
+    st.switch_page("Home.py")
     st.stop()
 
 # 📦 Download location

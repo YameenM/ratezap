@@ -132,13 +132,6 @@ with st.container():
             
 st.markdown("---")  # Nice separator line
 
-
-
-# Check login
-if "user" not in st.session_state:
-    st.warning("⚠️ Please login first.")
-    st.stop()
-
 st.title(" 👤 My Profile ✍️")
 
 # DB Connection

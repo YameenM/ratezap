@@ -8,7 +8,7 @@ hide_streamlit_ui()
 user = st.session_state.get("user", {})
 if not user:
     st.warning("⚠️ Please log in.")
-    st.switch_page("pages/Home.py")
+    st.switch_page("Home.py")
     st.stop()
     
     
