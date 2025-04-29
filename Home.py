@@ -116,7 +116,7 @@ with right:
                     }
 
                     st.toast("✅ Registered! Redirecting...")
-                    st.switch_page("pages/Dashboard.py")
+                    st.switch_page("Dashboard")
 
                 except sqlite3.IntegrityError:
                     st.error("❌ This email is already registered.")
@@ -141,7 +141,7 @@ with right:
 
                 if status == "expired":
                     st.warning("🚫 Your free trial has expired. Please Upfrade to Continue...")
-                    st.switch_page("pages/UpgradePrompt.py")
+                    st.switch_page("UpgradePrompt")
                     st.stop()
 
 
@@ -167,9 +167,9 @@ with right:
                 st.toast(f"✅ Welcome, {full_name}!")
                 
                 if status == "admin":
-                    st.switch_page("pages/Admin.py")
+                    st.switch_page("Admin")
                 else:
-                    st.switch_page("pages/Dashboard.py")
+                    st.switch_page("Dashboard")
 
             else:
                 st.error("❌ Invalid email or password.")
