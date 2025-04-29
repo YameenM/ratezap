@@ -1,7 +1,7 @@
 import streamlit as st
 import sys
 import os
-st.set_page_config(page_title="Dashboard | RateZap", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Dashboard", layout="wide", initial_sidebar_state="collapsed")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "app")))
 import sqlite3
 import os
