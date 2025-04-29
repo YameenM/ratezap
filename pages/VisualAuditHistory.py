@@ -1,11 +1,6 @@
 
 import streamlit as st
-import sqlite3
-import json
-import pandas as pd
-from helpers.night_audit_pdf import generate_audit_pdf
-from datetime import datetime
-import streamlit as st
+from helpers.night_audit_pdf import generate_pdf
 st.set_page_config(page_title="Visual Audit History", layout="wide")
 import sqlite3
 import json
@@ -245,6 +240,7 @@ for audit in audits:
         user_email = st.session_state["user"]["email"]
         full_name = st.session_state["user"].get("full_name", "User")
 
+        pdf = generate_pdf(hotel_name, audit_date, occupancy, adr, summary_data, room_summary_df, extra_fields_df)
 
         # Download PDF
                 # 📄 Action Buttons: Download | Email | Refresh
@@ -253,7 +249,7 @@ for audit in audits:
         with col1:
             st.download_button(
                 label="📥 Download PDF",
-                data=generate_audit_pdf(hotel_name, summary_data, room_summary_df, extra_fields_df),
+                data=pdf,
                 file_name=f"NightAudit_{audit_date}.pdf",
                 mime="application/pdf",
                 key=f"download_{audit_id}"
@@ -263,7 +259,7 @@ for audit in audits:
             if st.button(f"📧 Email Audit {audit_date}", key=f"email_{audit_id}"):
                  with st.spinner("📧 Sending email..."):
                     try:
-                        pdf_bytes = generate_audit_pdf(hotel_name, summary_data, room_summary_df, extra_fields_df)
+                        
                         
                         message = MIMEMultipart()
                         message["From"] = EMAIL_ADDRESS
@@ -280,7 +276,7 @@ for audit in audits:
                         """, "plain")
                         message.attach(body)
 
-                        part = MIMEApplication(pdf_bytes, Name=f"NightAudit_{audit_date}.pdf")
+                        part = MIMEApplication(pdf, Name=f"NightAudit_{audit_date}.pdf")
                         part['Content-Disposition'] = f'attachment; filename="NightAudit_{audit_date}.pdf"'
                         message.attach(part)
 
