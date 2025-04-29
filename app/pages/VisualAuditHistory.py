@@ -1,15 +1,10 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import streamlit as st
 import sqlite3
 import json
 import pandas as pd
-from helpers.night_audit_pdf import generate_audit_pdf
+from app.helpers.night_audit_pdf import generate_audit_pdf
 from datetime import datetime
-
-from helpers.night_audit_pdf import generate_audit_pdf
 import streamlit as st
 st.set_page_config(page_title="Visual Audit History", layout="wide")
 import sqlite3

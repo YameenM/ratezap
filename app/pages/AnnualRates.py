@@ -587,22 +587,22 @@ if st.button("👁️ Rate Preview"):
                 height=600
             )
             st.markdown("""
-                <style>
-                tbody tr:nth-child(even) {
-                    background-color: #f2f2f2;
-                }
-                thead tr th {
-                    background-color: #003366;
-                    color: white;
-                    font-size: 16px;
-                    text-align: center;
-                }
-                tbody td {
-                    font-size: 15px;
-                    text-align: center;
-                }
-                </style>
-            """, unsafe_allow_html=True)
+            <style>
+            tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            thead tr th {
+                background-color: #003366;
+                color: white;
+                font-size: 16px;
+                text-align: center;
+            }
+            tbody td {
+                font-size: 15px;
+                text-align: center;
+            }
+            </style>
+        """, unsafe_allow_html=True)
 
 
 

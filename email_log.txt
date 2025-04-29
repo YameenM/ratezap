@@ -12,3 +12,8 @@ Traceback (most recent call last):
   File "/Users/muhammad/ratezap/pages/SendDailyEmails.py", line 3, in <module>
     from utils import hide_streamlit_ui
 ModuleNotFoundError: No module named 'utils'
+2025-04-29 08:00:01.024 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+Traceback (most recent call last):
+  File "/Users/muhammad/ratezap/pages/SendDailyEmails.py", line 3, in <module>
+    from utils import hide_streamlit_ui
+ModuleNotFoundError: No module named 'utils'
