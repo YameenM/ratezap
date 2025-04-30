@@ -1,9 +1,14 @@
 
+_# Ignore Python cache and compiled files
 __pycache__/
-venv/
 *.pyc
-.env
+
+# Ignore database & secrets
 ratezap.db
-email_log.txt
+/mnt/data/ratezap.db
+
+# Ignore system & OS files
+.DS_Store
+
+# Ignore zipped backups
 *.zip
-.streamlit/secrets.toml

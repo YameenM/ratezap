@@ -1,7 +1,9 @@
 
 import streamlit as st
-
 st.set_page_config(page_title="Pricing | RateZap", layout="wide")
+from utils import hide_streamlit_ui
+hide_streamlit_ui()
+
 
 # 🔍 Get user country from session (fallback to 'World')
 user_country = st.session_state.get("custom_data", {}).get("country", "World")
