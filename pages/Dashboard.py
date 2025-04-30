@@ -540,6 +540,32 @@ if st.button("💡 Get Suggested Rate"):
     
     st.info("📌 Reason: \n- " +  " \n-  ".join(reasons))
     
+    display_ota_links_inline(prop_name or "My Hotel", custom_city or user.get("city", "City"))
+
+    c.execute('''
+        INSERT INTO rate_history (
+            user_id,
+            timestamp,
+            occupancy,
+            competitor_rate,
+            local_event,
+            day_type,
+            currency,
+            suggested_rate,
+            hotel_name
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        user_id,
+        datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        int(occupancy_ratio * 100),
+        comp_rate,
+        event_today,
+        day_type,
+        currency,
+        rate,
+        prop_name))
+    conn.commit()
+    
     # === 📅 Styled 3-Day Rate Forecast ===
 st.markdown("### 🪄 3-Day Rate Forecast")
 
@@ -616,39 +642,6 @@ if all_rows:
 
 else:
     st.info("Not enough rate history to forecast. Save a few suggestions first.")
-
-    # 📥 Save to history
-if "rate" not in locals():
-    st.warning("ℹ️ Please scroll ☝️ up, fill in all required fields, and click '💡 Get Suggested Rate' to generate your rate suggestion.")
-    st.stop()
-
-occupancy_ratio = occupied_rooms / total_rooms if total_rooms > 0 else 0
-
-display_ota_links_inline(prop_name or "My Hotel", custom_city or user.get("city", "City"))
-
-c.execute('''
-    INSERT INTO rate_history (
-        user_id,
-        timestamp,
-        occupancy,
-        competitor_rate,
-        local_event,
-        day_type,
-        currency,
-        suggested_rate,
-        hotel_name
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-''', (
-    user_id,
-    datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-    int(occupancy_ratio * 100),
-    comp_rate,
-    event_today,
-    day_type,
-    currency,
-    rate,
-    prop_name))
-conn.commit()
 
 
 # What If Testing Mode======================================================================  

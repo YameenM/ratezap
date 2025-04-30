@@ -102,7 +102,7 @@ with right:
                     
                     conn.commit()
                     user_id = c.lastrowid
-                    st.session_state["user"] = {"id": user_id, "full_name": full_name, "email": email, "status": "trial"}
+                    st.session_state["user"] = {"id": user_id, "full_name": full_name, "email": email, "subscription_status": subscription_status, "trial_start": trial_start_date}
 
                     # Preload settings
                     c.execute("SELECT prop_type, prop_name, city, country, currency FROM user_settings WHERE user_id = ?", (user_id,))
@@ -149,7 +149,7 @@ with right:
                     "id": user_id,
                     "full_name": full_name,
                     "email": email,
-                    "status": status,
+                    "subscription_status": status,
                     "trial_start": trial_start
                 }
 
