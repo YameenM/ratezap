@@ -92,8 +92,6 @@ if "user" not in st.session_state:
     st.switch_page("Home.py")
     st.stop()
 
-# Hide Sidebar
-hide_streamlit_ui()
 
 # ➡️ Custom Top Navigation Bar
 # Split layout into 7 equal columns
@@ -167,6 +165,7 @@ with col1:
 uploaded_file = st.file_uploader("Upload your Night Audit Excel file", type=["xlsx", "xls", "csv"])
 
 if uploaded_file:
+    st.success(f"📄 File uploaded: `{uploaded_file.name}`")
     try:
         file_ext = uploaded_file.name.lower().split(".")[-1]
 
@@ -215,9 +214,18 @@ if uploaded_file:
         df.rename(columns=rename_map, inplace=True)
 
         # ✅ Convert Occupied field
-        if "Occupied" in df.columns:
-            df["Occupied"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
+        if "Occupied_Display" in df.columns:
+            df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
 
+        # 🧠 Pre-calculate Occupied using date logic before preview
+        if "Check-In Date" in df.columns and "Check-Out Date" in df.columns:
+            today = pd.to_datetime("today").normalize()
+            checkin = pd.to_datetime(df["Check-In Date"], errors="coerce")
+            checkout = pd.to_datetime(df["Check-Out Date"], errors="coerce")
+            df["Occupied"] = ((checkin <= today) & (checkout >= today)).astype(int)
+            df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
+
+        
         # 📋 Show styled raw preview
         st.markdown("#### 🔍 Raw Preview")
         
@@ -244,19 +252,22 @@ if uploaded_file:
             if isinstance(val, str):
                 return 'background-color: lightgreen' if "Occupied" in val else 'background-color: lightcoral'
             return ''
+    
 
         if "Occupied" in df.columns:
-            styled_df = df.style.applymap(color_occupied, subset=["Occupied"])
+            df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
+            styled_df = df.style.applymap(color_occupied, subset=["Occupied_Display"])
             st.dataframe(styled_df, use_container_width=True)
         else:
+            st.warning("⚠️ 'Occupied' column not found in file.")
             st.dataframe(df, use_container_width=True)
-        
+
           
         # 📋 📋 📋 File Ready Check
         st.divider()
         st.markdown("### 🛫 File Readiness Check")
 
-        required_columns = ["Room Type", "Rate", "Check-In Date", "Check-Out Date"]
+        required_columns = ["Room Type", "Rate", "Check-In Date", "Check-Out Date", "Occupied"]
 
         # Check for missing columns
         missing_cols = [col for col in required_columns if col not in df.columns]
@@ -286,6 +297,9 @@ if uploaded_file:
         # ✅ Parsing based on Template
         st.info(f"Parsing using **{template_type}**...")
         result = None
+        
+        if "Occupied" in df.columns and df["Occupied"].dtype == object:
+            df["Occupied"] = df["Occupied"].apply(lambda x: 1 if str(x).strip().lower() == "occupied" else 0)
 
         if template_type == "Standard Format":
             result = parse_standard_audit(df, symbol)
@@ -302,6 +316,17 @@ if uploaded_file:
             st.stop()
 
         occupancy, adr, summary_data, room_summary_df, extra_fields_df = result
+        
+                
+        if summary_data.get("Occupied", 0) == 0:
+            st.error("❌ No occupied rooms found — please verify your audit or column mappings.")
+            st.stop()
+
+        #st.subheader("🧪 Debugging Parsed Output")
+        #st.write("Occupancy:", occupancy)
+        #st.write("ADR:", adr)
+        #st.write("Summary:", summary_data)
+
 
         summary_data = convert_to_serializable(summary_data)
 
@@ -453,22 +478,10 @@ if uploaded_file:
 
             pdf_data = generate_summary_pdf(hotel_name, audit_date_friendly, total_rooms, occupied_rooms, occupancy_pct, adr_value, symbol)
             st.divider()
-
-        
-            colb1, colb2 = st.columns(2)
-
-            with colb1:
+            
+            with st.expander("📄 Preview & Download Audit Summary PDF"):
                 st.download_button(
-                    label="📄 Download Last Uploaded Audit (PDF)",
-                    data=pdf_data,
-                    file_name=f"Audit_Summary_{hotel_name.replace(' ', '_')}_{audit_date_friendly.replace(' ', '_')}.pdf",
-                    mime="application/pdf",
-                    use_container_width=True
-                )
-
-            with colb2:
-                st.download_button(
-                    label="📄 Save Summary as PDF",
+                    label="📥 Download PDF",
                     data=pdf_data,
                     file_name=f"Audit_Summary_{hotel_name.replace(' ', '_')}_{audit_date_friendly.replace(' ', '_')}.pdf",
                     mime="application/pdf",
