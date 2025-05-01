@@ -95,52 +95,54 @@ if "user" not in st.session_state:
 
 # ➡️ Custom Top Navigation Bar
 # Split layout into 7 equal columns
-with st.container():
-    nav_col1, nav_col2, nav_col3, nav_col4, nav_col5, nav_col6, nav_col7 = st.columns(7)
+# 🔧 Better spaced navigation bar with no wrapping
+button_style = """
+    <style>
+    div.stButton > button {
+        width: 100%;
+        height: 3rem;
+        font-size: 0.9rem;
+        margin: 4px;
+        border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    </style>
+"""
+st.markdown(button_style, unsafe_allow_html=True)
 
-    button_style = """
-        <style>
-        div.stButton > button {
-            width: 100%;
-            height: 3rem;
-            font-size: 1.0rem;
-            margin: 4px;
-            border-radius: 8px;
-        }
-        </style>
-    """
-    st.markdown(button_style, unsafe_allow_html=True)
+nav_cols = st.columns([1.2]*7)
 
-    with nav_col1:
-        if st.button("🏠 Dashboard"):
-            st.switch_page("pages/Dashboard.py")
+with nav_cols[0]:
+    if st.button("🏠 Dashboard"):
+        st.switch_page("pages/Dashboard.py")
 
-    with nav_col2:
-        if st.button("📄 Annual Rates"):
-            st.switch_page("pages/AnnualRates.py")
+with nav_cols[1]:
+    if st.button("📄 Annual Rates"):
+        st.switch_page("pages/AnnualRates.py")
 
-    with nav_col3:
-        if st.button("🛏️ Night Audit"):
-            st.switch_page("pages/NightAudit.py")
+with nav_cols[2]:
+    if st.button("🛏️ Night Audit"):
+        st.switch_page("pages/NightAudit.py")
 
-    with nav_col4:
-        if st.button("🕓 Audit History"):
-            st.switch_page("pages/VisualAuditHistory.py")
+with nav_cols[3]:
+    if st.button("🕓 Audit History"):
+        st.switch_page("pages/VisualAuditHistory.py")
 
-    with nav_col5:
-        if st.button("📈 Rate Optimizer"):
-            st.switch_page("pages/RateOptimizer.py")
+with nav_cols[4]:
+    if st.button("📈 Rate Optimizer"):
+        st.switch_page("pages/RateOptimizer.py")
 
-    with nav_col6:
-        if st.button("🏢 Companies List"):
-            st.switch_page("pages/Companies.py")
+with nav_cols[5]:
+    if st.button("🏢 Companies List"):
+        st.switch_page("pages/Companies.py")
 
-    with nav_col7:
-        if st.button("👤 My Profile"):
-            st.switch_page("pages/Profile.py")
+with nav_cols[6]:
+    if st.button("👤 My Profile"):
+        st.switch_page("pages/Profile.py")
 
 st.markdown("---")  # Nice separator line
-
 
 
 # Initialize safe empty variables
@@ -218,12 +220,13 @@ if uploaded_file:
             df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
 
         # 🧠 Pre-calculate Occupied using date logic before preview
-        if "Check-In Date" in df.columns and "Check-Out Date" in df.columns:
-            today = pd.to_datetime("today").normalize()
-            checkin = pd.to_datetime(df["Check-In Date"], errors="coerce")
-            checkout = pd.to_datetime(df["Check-Out Date"], errors="coerce")
-            df["Occupied"] = ((checkin <= today) & (checkout >= today)).astype(int)
-            df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
+        if template_type not in ["Marriott Format", "Hilton Format"]:
+            if "Check-In Date" in df.columns and "Check-Out Date" in df.columns:
+                today = pd.to_datetime("today").normalize()
+                checkin = pd.to_datetime(df["Check-In Date"], errors="coerce")
+                checkout = pd.to_datetime(df["Check-Out Date"], errors="coerce")
+                df["Occupied"] = ((checkin <= today) & (checkout >= today)).astype(int)
+                df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
 
         
         # 📋 Show styled raw preview
@@ -298,9 +301,23 @@ if uploaded_file:
         st.info(f"Parsing using **{template_type}**...")
         result = None
         
-        if "Occupied" in df.columns and df["Occupied"].dtype == object:
-            df["Occupied"] = df["Occupied"].apply(lambda x: 1 if str(x).strip().lower() == "occupied" else 0)
+        if template_type == "Marriott Format":
+            df.rename(columns={
+                "Room Class": "Room Type",
+                "Occupancy Status": "Occupied",
+                "Rate Per Night": "Rate",
+                "Check-in": "Check-In Date",
+                "Check-out": "Check-Out Date"
+            }, inplace=True)
+        
+        for col in ["Check-In Date", "Check-Out Date"]:
+            if col in df.columns:
+                df[col] = pd.to_datetime(df[col], errors="coerce")
 
+        
+        if "Occupied" in df.columns and df["Occupied"].dtype == object:
+            df["Occupied"] = df["Occupied"].apply(lambda x: 1 if str(x).strip().lower() in ["occupied", "yes", "checked-in"] else 0)
+        
         if template_type == "Standard Format":
             result = parse_standard_audit(df, symbol)
         elif template_type == "Marriott Format":

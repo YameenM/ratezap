@@ -8,6 +8,52 @@ from utils import hide_streamlit_ui
 from io import BytesIO
 
 hide_streamlit_ui()
+# 🔧 Better spaced navigation bar with no wrapping
+button_style = """
+    <style>
+    div.stButton > button {
+        width: 100%;
+        height: 3rem;
+        font-size: 0.9rem;
+        margin: 4px;
+        border-radius: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    </style>
+"""
+st.markdown(button_style, unsafe_allow_html=True)
+
+nav_cols = st.columns([1.2]*7)
+
+with nav_cols[0]:
+    if st.button("🏠 Dashboard"):
+        st.switch_page("pages/Dashboard.py")
+
+with nav_cols[1]:
+    if st.button("📄 Annual Rates"):
+        st.switch_page("pages/AnnualRates.py")
+
+with nav_cols[2]:
+    if st.button("🛏️ Night Audit"):
+        st.switch_page("pages/NightAudit.py")
+
+with nav_cols[3]:
+    if st.button("🕓 Audit History"):
+        st.switch_page("pages/VisualAuditHistory.py")
+
+with nav_cols[4]:
+    if st.button("📈 Rate Optimizer"):
+        st.switch_page("pages/RateOptimizer.py")
+
+with nav_cols[5]:
+    if st.button("🏢 Companies List"):
+        st.switch_page("pages/Companies.py")
+
+with nav_cols[6]:
+    if st.button("👤 My Profile"):
+        st.switch_page("pages/Profile.py")
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()

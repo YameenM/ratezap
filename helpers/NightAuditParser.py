@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import math
@@ -12,12 +13,11 @@ hide_streamlit_ui()
 def ensure_status_column(df):
     today = pd.to_datetime("today").normalize()
 
-    if 'Check-In Date' in df.columns and 'Check-Out Date' in df.columns:
-        arrival = pd.to_datetime(df['Check-In Date'], errors='coerce')
-        departure = pd.to_datetime(df['Check-Out Date'], errors='coerce')
-
-        df['Occupied'] = ((arrival <= today) & (departure >= today)).astype(int)
-        df['Occupied_Display'] = df['Occupied'].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
+    if "Check-In Date" in df.columns and "Check-Out Date" in df.columns:
+        checkin = pd.to_datetime(df["Check-In Date"], errors="coerce")
+        checkout = pd.to_datetime(df["Check-Out Date"], errors="coerce")
+        df["Occupied"] = ((checkin <= today) & (checkout >= today)).astype(int)
+        df["Occupied_Display"] = df["Occupied"].apply(lambda x: "👤 Occupied" if x == 1 else "🛏️ Vacant")
     else:
         raise ValueError("❌ Cannot calculate occupancy — missing Check-In/Out dates")
 
@@ -37,12 +37,9 @@ def parse_standard_audit(df, symbol):
     df["Occupied"] = pd.to_numeric(df["Occupied"], errors="coerce")
     df["Rate"] = pd.to_numeric(df["Rate"], errors="coerce")
 
-    total_rooms = int(len(df))
+    total_rooms = len(df)
     occupied_rooms = int(df["Occupied"].sum())
     vacant_rooms = total_rooms - occupied_rooms
-
-    if occupied_rooms == 0:
-        st.warning("🛑 No occupied rooms found in this audit. ADR and Revenue are set to 0 by default.")
 
     avg_rate = df.loc[df["Occupied"] == 1, "Rate"].mean()
     total_revenue = df.loc[df["Occupied"] == 1, "Rate"].sum()
@@ -87,9 +84,7 @@ def parse_standard_audit(df, symbol):
         "symbol": symbol
     }
 
-    room_json = None
-    if room_summary_df is not None and not room_summary_df.empty:
-        room_json = room_summary_df.to_json(orient="records")
+    room_json = room_summary_df.to_json(orient="records") if not room_summary_df.empty else None
 
     save_audit_summary(
         user_id=user_id,
@@ -117,21 +112,19 @@ def parse_custom_audit(df, symbol):
     extra_cols = [col for col in columns if col not in excluded]
     selected_extra_cols = st.multiselect("➕ Optional Extra Columns", extra_cols)
 
-    # Convert timestamps
-    checkin_raw = pd.to_numeric(df[checkin_col], errors="coerce")
-    checkout_raw = pd.to_numeric(df[checkout_col], errors="coerce")
-
-    def convert_timestamp(series):
+    def normalize_excel_dates(series):
+        series = pd.to_numeric(series, errors="coerce")
         if series.max() > 1e15:
             return pd.to_datetime(series, unit="ns", errors="coerce")
         elif series.max() > 1e12:
             return pd.to_datetime(series, unit="ms", errors="coerce")
         elif series.max() > 1e10:
             return pd.to_datetime(series, unit="s", errors="coerce")
-        return pd.to_datetime(series, errors="coerce")
+        else:
+            return pd.to_datetime(series, errors="coerce")
 
-    checkin_converted = convert_timestamp(checkin_raw)
-    checkout_converted = convert_timestamp(checkout_raw)
+    checkin_converted = normalize_excel_dates(df[checkin_col])
+    checkout_converted = normalize_excel_dates(df[checkout_col])
 
     mapped_df = pd.DataFrame({
         "Room Type": df[room_type_col],
@@ -149,14 +142,18 @@ def parse_custom_audit(df, symbol):
 # 🏨 Marriott Format
 def parse_marriott_audit(df, symbol):
     df.rename(columns={
-        "Room_Category": "Room Type",
-        "Rate_USD": "Rate",
-        "In_Date": "Check-In Date",
-        "Out_Date": "Check-Out Date"
+        "Room Class": "Room Type",
+        "Occupancy Status": "Occupied",
+        "Rate Per Night": "Rate",
+        "Check-in": "Check-In Date",
+        "Check-out": "Check-Out Date"
     }, inplace=True)
 
-    df = ensure_status_column(df)
+    df["Occupied"] = df["Occupied"].apply(lambda x: 1 if str(x).strip().lower() == "occupied" else 0)
     return parse_standard_audit(df, symbol)
+
+
+
 
 # ===============================================
 # 🏨 Hilton Format
